@@ -1,15 +1,49 @@
-/* body,
-.popup {
-    font-family: sans-serif;
-    padding: 8px;
-    width: 300px;
+/* src/popup/styles.css */
+
+.container {
+    padding: 1rem;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
 }
 
-.popup h1 {
-    margin: 0 0 8px;
-    font-size: 1.2rem;
+.status {
+    font-size: 1.75rem;
+    font-weight: bold;
+    margin: 0 0 0.5rem;
 }
 
-.popup .error {
-    color: red;
-} */
+.status.safe {
+    color: #28a745;
+    /* green */
+}
+
+.status.danger {
+    color: #dc3545;
+    /* red */
+}
+
+.total-score {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.method-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.method-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.method-name {
+    font-weight: 500;
+}
+
+.method-score {
+    font-weight: 700;
+}
