@@ -4,8 +4,11 @@
  * This module is designed to run in content scripts and does not use any Chrome APIs
  */
 
-import { URL_CONFIG, URL_ERROR_MESSAGES, URL_SEVERITY_MAP, UrlErrorCode, DetectionResult } from '../constants';
 import { createDetectionResult } from '../utils/detectionResult';
+import { URL_CONFIG,
+         URL_SEVERITY_MAP,
+         UrlErrorCode,
+        DetectionResult } from '../constants';
 
 /**
  * Validates and normalizes URL input

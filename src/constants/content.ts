@@ -1,40 +1,41 @@
-import { Severity } from './global';
+import { Severity } from '.';
 
-/**
- * Configuration constants for content analysis
- */
+/** Content-specific error codes */
+export enum ContentErrorCode {
+    FORM_SUBMISSION = 'FORM_SUBMISSION',
+    HIDDEN_INPUTS = 'HIDDEN_INPUTS',
+    SUSPICIOUS_IFRAME = 'SUSPICIOUS_IFRAME',
+    SUSPICIOUS_LINK = 'SUSPICIOUS_LINK',
+    NO_THREAT = 'NO_THREAT',
+}
+
+/** Configuration constants for content analysis */
 export const CONTENT_CONFIG = {
-    /** Maximum number of hidden inputs before triggering an alert */
     MAX_HIDDEN_INPUTS: 3,
-    /** Regular expression to match standard IPv4 addresses */
-    IPv4_PATTERN: /^\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/
+    IPV4_PATTERN: /^\d{1,3}(?:\.\d{1,3}){3}$/,
 } as const;
 
-/**
- * Set of non-HTTP protocols typically used for obfuscation or XSS vectors
- */
+/** Non-HTTP protocols used for obfuscation or XSS */
 export const SUSPICIOUS_PROTOCOLS = new Set([
     'javascript:',
     'data:',
-    'about:'
+    'about:',
 ]) as ReadonlySet<string>;
 
-/**
- * Standardized error messages for content analysis
- */
-export const CONTENT_ERROR_MESSAGES = {
-    FORM_SUBMISSION: 'Form submission to suspicious URL detected',
-    HIDDEN_INPUTS: 'Excessive number of hidden inputs detected',
-    SUSPICIOUS_IFRAME: 'Suspicious iframe source detected',
-    SUSPICIOUS_LINK: 'Suspicious link detected',
-    NO_THREAT: 'No suspicious content patterns detected'
-} as const;
+/** Human-readable messages keyed by code */
+export const CONTENT_ERROR_MESSAGES: Record<ContentErrorCode, string> = {
+    [ContentErrorCode.FORM_SUBMISSION]: 'Form submission to suspicious URL detected',
+    [ContentErrorCode.HIDDEN_INPUTS]: 'Excessive number of hidden inputs detected',
+    [ContentErrorCode.SUSPICIOUS_IFRAME]: 'Suspicious iframe source detected',
+    [ContentErrorCode.SUSPICIOUS_LINK]: 'Suspicious link detected',
+    [ContentErrorCode.NO_THREAT]: 'No suspicious content patterns detected',
+};
 
-/** Severity mapping for content analysis errors */
-export const CONTENT_SEVERITY_MAP: Record<keyof typeof CONTENT_ERROR_MESSAGES, Severity> = {
-    FORM_SUBMISSION: 'high',
-    HIDDEN_INPUTS: 'medium',
-    SUSPICIOUS_IFRAME: 'medium',
-    SUSPICIOUS_LINK: 'low',
-    NO_THREAT: 'low'
-} as const; 
+/** Severity mapping keyed by the same codes */
+export const CONTENT_SEVERITY_MAP: Record<ContentErrorCode, Severity> = {
+    [ContentErrorCode.FORM_SUBMISSION]: 'high',
+    [ContentErrorCode.HIDDEN_INPUTS]: 'medium',
+    [ContentErrorCode.SUSPICIOUS_IFRAME]: 'medium',
+    [ContentErrorCode.SUSPICIOUS_LINK]: 'low',
+    [ContentErrorCode.NO_THREAT]: 'low',
+};
